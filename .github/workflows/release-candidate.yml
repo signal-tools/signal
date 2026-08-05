@@ -1,0 +1,46 @@
+name: Release candidate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - name: Use the pinned npm CLI
+        run: npm install --global npm@11.13.0
+      - run: npm ci
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Validate package
+        run: npm run build && npm run lint && npm run format:check && npm test && npm run package:check
+      - name: Pack candidate
+        id: package
+        run: |
+          mkdir -p release
+          tarball="$(npm pack --pack-destination release | tail -n 1)"
+          echo "tarball=$tarball" >> "$GITHUB_OUTPUT"
+      - name: Test candidate in a clean consumer
+        env:
+          TARBALL: ${{ steps.package.outputs.tarball }}
+        run: node scripts/test-package.mjs "release/$TARBALL"
+      - name: Write candidate manifest and checksum
+        env:
+          TARBALL: ${{ steps.package.outputs.tarball }}
+        run: |
+          node scripts/write-candidate-manifest.mjs "release/$TARBALL"
+          shasum -a 256 "release/$TARBALL" > release/SHA256SUMS
+      - uses: actions/upload-artifact@v6
+        with:
+          name: npm-release-candidate
+          path: release/
+          if-no-files-found: error
+          retention-days: 14

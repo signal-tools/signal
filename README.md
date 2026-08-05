@@ -1,9 +1,9 @@
-# @jsxtools/signal
+# @signal-tools/signal
 
 A tiny, spec-compliant implementation of the [TC39 Signals proposal](https://github.com/tc39/proposal-signals).
 
 ```shell
-npm install @jsxtools/signal
+npm install @signal-tools/signal
 ```
 
 ## Features
@@ -11,13 +11,13 @@ npm install @jsxtools/signal
 - Spec-compliant reactive primitives: `State`, `Computed`, and `Watcher`
 - Glitch-free execution with topological ordering
 - Type guards: `Signal.isState()` and `Signal.isComputed()`
-- Zero dependencies; ~2.3KB minified, ~1.1KB gzipped
-- 100% test coverage across Node.js, Chromium, Firefox, and WebKit
+- Zero dependencies; ~3.1KB minified, ~1.3KB gzipped
+- Tested across Node.js, Chromium, Firefox, and WebKit
 
 ## Usage
 
 ```js
-import { Signal } from "@jsxtools/signal";
+import { Signal } from "@signal-tools/signal";
 
 // Create a state signal
 const count = new Signal.State(0);
