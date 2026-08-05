@@ -1,0 +1,73 @@
+{
+	"name": "@jsxtools/signal",
+	"version": "0.0.0",
+	"description": "A tiny, spec-compliant implementation of the TC39 Signals proposal",
+	"author": "Jonathan Neal <jonathantneal@hotmail.com> (https://jonneal.dev)",
+	"homepage": "https://github.com/jsxtools/signal",
+	"license": "MIT-0",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/signal.d.ts",
+			"default": "./dist/signal.min.js"
+		}
+	},
+	"main": "./dist/signal.min.js",
+	"types": "./dist/signal.d.ts",
+	"files": [
+		"dist/signal.d.ts",
+		"dist/signal.d.ts.map",
+		"dist/signal.min.js",
+		"dist/signal.min.js.map"
+	],
+	"repository": "https://github.com/jsxtools/signal",
+	"bugs": "https://github.com/jsxtools/signal/issues",
+	"sideEffects": false,
+	"keywords": [
+		"computed",
+		"dependency",
+		"effect",
+		"fine-grained",
+		"memoization",
+		"polyfill",
+		"ponyfill",
+		"proposal",
+		"reactive",
+		"reactivity",
+		"scheduling",
+		"signal",
+		"state",
+		"tc39",
+		"watcher"
+	],
+	"scripts": {
+		"build": "tsc",
+		"postbuild": "node scripts/minify.js",
+		"format": "dprint fmt",
+		"format:check": "dprint check",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
+		"test": "npm run test:node && npm run test:chromium && npm run test:firefox && npm run test:webkit",
+		"test:chromium": "vitest run --browser.name=chromium",
+		"test:firefox": "vitest run --browser.name=firefox",
+		"test:node": "vitest run --config vitest.node.config.ts",
+		"test:webkit": "vitest run --browser.name=webkit",
+		"vitest": "vitest"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "latest",
+		"@types/node": "26.1.2",
+		"@vitest/browser-playwright": "4.1.10",
+		"@vitest/coverage-istanbul": "4.1.10",
+		"@vitest/ui": "4.1.10",
+		"dprint": "latest",
+		"playwright": "1.62.1",
+		"terser": "5.49.2",
+		"typescript": "7.0.2",
+		"vitest": "4.1.10"
+	},
+	"allowScripts": {
+		"dprint": true,
+		"fsevents": true
+	}
+}
