@@ -38,7 +38,7 @@ jobs:
         run: |
           node scripts/write-candidate-manifest.mjs "release/$TARBALL"
           shasum -a 256 "release/$TARBALL" > release/SHA256SUMS
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: npm-release-candidate
           path: release/
