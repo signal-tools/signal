@@ -1,0 +1,39 @@
+{
+	"name": "@signal-tools/signal-workspace",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"workspaces": [
+		"workspaces/*"
+	],
+	"scripts": {
+		"build": "npm run build --workspace @signal-tools/signal",
+		"format": "dprint fmt",
+		"format:check": "dprint check",
+		"lint": "biome check",
+		"lint:fix": "biome check --write",
+		"package:check": "npm pack --dry-run --workspace @signal-tools/signal",
+		"test": "npm run test:node && npm run test:chromium && npm run test:firefox && npm run test:webkit",
+		"test:chromium": "vitest run --browser.name=chromium",
+		"test:firefox": "vitest run --browser.name=firefox",
+		"test:node": "vitest run --config vitest.node.config.ts",
+		"test:webkit": "vitest run --browser.name=webkit"
+	},
+	"packageManager": "npm@12.0.2",
+	"allowScripts": {
+		"dprint": true,
+		"fsevents": true
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.7",
+		"@types/node": "26.1.2",
+		"@vitest/browser-playwright": "4.1.10",
+		"@vitest/coverage-istanbul": "4.1.10",
+		"@vitest/ui": "4.1.10",
+		"dprint": "0.55.2",
+		"playwright": "1.62.1",
+		"terser": "5.49.2",
+		"typescript": "7.0.2",
+		"vitest": "4.1.10"
+	}
+}
