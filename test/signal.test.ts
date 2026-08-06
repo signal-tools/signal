@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { Signal } from "../src/signal.ts";
+import { Signal } from "../workspaces/signal/src/signal.ts";
 
 describe("Signal.State", () => {
 	it("creates with initial value", () => {

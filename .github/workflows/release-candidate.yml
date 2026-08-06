@@ -26,7 +26,7 @@ jobs:
         id: package
         run: |
           mkdir -p release
-          tarball="$(npm pack --pack-destination release | tail -n 1)"
+          tarball="$(npm pack --workspace @signal-tools/signal --pack-destination release | tail -n 1)"
           echo "tarball=$tarball" >> "$GITHUB_OUTPUT"
       - name: Test candidate in a clean consumer
         env:
